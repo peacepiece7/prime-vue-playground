@@ -27,8 +27,6 @@ const ac = ref('')
 
 // 입력 값에 따라 suggestions 업데이트
 const searchSuggestions = (event: any) => {
-  console.log('event', event)
-  console.log('autoCompleteRef.value: ', autoCompleteRef.value)
   const query = event.query.toLowerCase()
   const filtered = optionList.value.filter((option) =>
     option.cdNm.toLowerCase().includes(query)
@@ -55,8 +53,14 @@ const selectOption = ref([
   { label: 'Option 5', value: 5 },
 ])
 
-const selectedOption = ref(null)
-const editableSelectRef = ref<any>()
+const so1 = ref('')
+const es1 = ref<any>()
+
+const so2 = ref('')
+const es2 = ref<any>()
+
+const so3 = ref('')
+const es3 = ref<any>()
 </script>
 
 <template>
@@ -92,7 +96,11 @@ const editableSelectRef = ref<any>()
         dropdown
         :suggestions="autoCompleteList"
         @complete="searchSuggestions"
+        option-label="cdNm"
       >
+        <template #option="slotProps">
+          <div>{{ slotProps.option.cdNm }}</div>
+        </template>
       </AutoComplete>
       <label for="over_label">운영 종목</label>
     </FloatLabel>
@@ -105,17 +113,45 @@ const editableSelectRef = ref<any>()
   <div style="padding: 20px"></div>
   <FloatLabel variant="on">
     <Select
-      ref="editableSelectRef"
+      ref="es1"
       input-id="on_label_select"
-      v-model="selectedOption"
+      v-model="so1"
       :options="selectOption"
       option-label="label"
       option-value="value"
       editable
-      @focus="editableSelectRef.show()"
       style="width: 200px"
     />
-    <label for="on_label_select">운영종목</label>
+    <label for="on_label_select">경기 종목</label>
+  </FloatLabel>
+  <div style="padding: 10px"></div>
+  <FloatLabel variant="on">
+    <!-- 업데이트 되는 순서 떄문에 옵션을 선택해도 계속 show 되는 문제 -->
+    <Select
+      ref="es2"
+      input-id="on_label_select"
+      v-model="so2"
+      :options="selectOption"
+      option-label="label"
+      option-value="value"
+      @focus="es2.show()"
+      editable
+      style="width: 200px"
+    />
+    <label for="on_label_select">경기 종목 (focus)</label>
+  </FloatLabel>
+  <div style="padding: 10px"></div>
+  <FloatLabel variant="on">
+    <Select
+      ref="es3"
+      input-id="on_label_select"
+      v-model="so3"
+      :options="selectOption"
+      option-label="label"
+      option-value="value"
+      style="width: 200px"
+    />
+    <label for="on_label_select">경기 종목 (only read)</label>
   </FloatLabel>
 
   <h2>
