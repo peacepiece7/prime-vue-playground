@@ -21,6 +21,10 @@ const routes = [
         component: () =>
           import('./pages/DataTablePaginationWithApiAndColumnToggle.vue'),
       },
+      {
+        path: '/cascade-selector',
+        component: () => import('./pages/CascadeSelector.vue'),
+      },
     ],
   },
 ]

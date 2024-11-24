@@ -13,6 +13,7 @@ import { RouterView } from 'vue-router'
     <RouterLink to="/datatable-pagination-with-api-and-colum-toggle">
       DataTablePaginationWithApiAndColumnToggle
     </RouterLink>
+    <RouterLink to="/cascade-selector"> CasecadeSelector </RouterLink>
   </div>
   <RouterView />
 </template>
