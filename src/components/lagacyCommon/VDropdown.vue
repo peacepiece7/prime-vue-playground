@@ -4,10 +4,7 @@ import usePositionTracker from '../../composables/usePositionTracker'
 import { cloneDeep } from '../../util/common'
 import { watch } from 'vue'
 import { $extractNumbers } from '../../plugins/commonFn'
-import VCheckbox from './VCheckbox.vue'
 import { v4 as uuidv4 } from 'uuid'
-import VIconFont from './VIconFont.vue'
-import VTextInput from './VTextInput.vue'
 
 const uuid = uuidv4()
 
@@ -181,21 +178,22 @@ const optionsValue = computed(() => {
     :style="{ width: width }"
     tabindex="0"
     @keydown.enter="
-      isHidden = !isHidden
-      toggleHandler()
+      () => {
+        isHidden = !isHidden
+        toggleHandler()
+      }
     "
     @click="
-      isHidden = !isHidden
-      toggleHandler()
+      () => {
+        isHidden = !isHidden
+        toggleHandler()
+      }
     "
   >
     <p class="select-view">
       {{ selectedTitles }}
     </p>
-    <div class="select-btn">
-      <VIconFont icon="ic_arrow" v-if="type === 'single'" />
-      <VIconFont icon="ic_dropdown" v-else style="font-size: 13px" />
-    </div>
+    <div class="select-btn">icon</div>
     <Teleport to="body">
       <div
         class="select-opt-animation-guard"
@@ -209,7 +207,7 @@ const optionsValue = computed(() => {
         ref="element"
       >
         <div class="select-like-search" v-if="searhDropdown">
-          <VTextInput search-icon v-model="searchVal" width="100%" />
+          <input v-model="searchVal" width="100%" />
         </div>
         <div class="select-opt-cover">
           <ul class="select-opt-list" v-if="type === 'single'">
@@ -237,7 +235,8 @@ const optionsValue = computed(() => {
               class="select-opt"
               :class="{ selected: checkedList.length === options.length }"
             >
-              <VCheckbox
+              <input
+                type="checkbox"
                 class="mr-10"
                 :checked="checkedList.length === options.length"
                 :id="uuid"
@@ -254,7 +253,8 @@ const optionsValue = computed(() => {
               :key="item[valueProperty]"
               :class="{ selected: selected(item) }"
             >
-              <VCheckbox
+              <input
+                type="checkbox"
                 class="mr-10"
                 :id="item[valueProperty]"
                 :checked="selected(item)"

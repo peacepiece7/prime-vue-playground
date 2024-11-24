@@ -1,12 +1,12 @@
-import { createMemoryHistory, createRouter } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
   { path: '/', component: () => import('./pages/Home.vue') },
   { path: '/dropdown', component: () => import('./pages/Dropdown.vue') },
-  { path: 'datatable', component: () => import('./pages/DataTable.vue') },
+  { path: '/datatable', component: () => import('./pages/DataTable.vue') },
 ]
 
 export const router = createRouter({
-  history: createMemoryHistory(),
+  history: createWebHistory(),
   routes,
 })
