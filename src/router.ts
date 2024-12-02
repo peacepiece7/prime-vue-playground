@@ -5,7 +5,6 @@ const routes = [
     path: '/',
     component: () => import('./pages/Home.vue'),
     children: [
-      { path: '/', component: () => import('./pages/Home.vue') },
       { path: '/dropdown', component: () => import('./pages/Dropdown.vue') },
       { path: '/datatable', component: () => import('./pages/DataTable.vue') },
       {
